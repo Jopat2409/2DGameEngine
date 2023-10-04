@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.7)
+include(GenerateExportHeader)
+
+add_library(engine SHARED "")
+generate_export_header(engine EXPORT_MACRO_NAME ENGINE_API)
+
+target_sources(engine
+    PRIVATE
+        engine.cpp
+        scene.cpp
+        gametimer.cpp
+        manager.cpp
+        scenemanager.cpp
+)
+
+set_target_properties(engine PROPERTIES VERSION ${PROJECT_VERSION})
+add_compile_definitions(MAKEDLL)
+target_compile_features(engine PUBLIC cxx_std_17)

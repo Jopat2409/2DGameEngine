@@ -3,6 +3,7 @@
 #include "..\include\engine\manager.hpp"
 #include "..\include\engine\scenemanager.hpp"
 #include "..\include\engine\ecs.hpp"
+#include <engine\console.hpp>
 
 core::SystemManager* core::SystemManager::m_Instance = nullptr;
 
@@ -10,6 +11,7 @@ core::SystemManager::SystemManager()
 {
     // Register internal engine systems
     LOG_INFO("Creating systems")
+    RegisterSystem(new core::Console(), SYS_CONSOLE);
     RegisterSystem(new GameTimer(), SYS_TIMER);
     RegisterSystem(new SceneManager(), SYS_SCENEMANAGER);
     RegisterSystem(new ent::ECS(), SYS_ECS);

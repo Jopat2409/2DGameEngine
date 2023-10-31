@@ -2,16 +2,14 @@
 
 core::Engine::Engine() : m_SysMgrInstance(SystemManager::GetManager())
 {
-
 }
 core::Engine::~Engine()
 {
-
+    Exit();
 }
 
 int core::Engine::Init()
 {
-    LOG_INFO("Initialising Engine!")
     return InitEngine();
 }
 void core::Engine::Run(Scene* mainScene)
@@ -40,7 +38,7 @@ void core::Engine::Run(Scene* mainScene)
             std::cout << "Running engine with " << m_FramesPerSecond << " frames at a tick rate of " << m_UpdatesPerSecond << " per second.\n";
             timer -= 1000;
         }
-
+        HandleInput();
         // Keep up with the update cycle
         while(lag >= tps){
             Tick(e_time);
@@ -53,7 +51,7 @@ void core::Engine::Run(Scene* mainScene)
         p_time = c_time;
         frames += 1;
 
-    }while(m_IsRunning);
+    }while(m_IsRunning && !glfwWindowShouldClose(m_Renderer.GetWindow()));
     Exit();
 
 }
@@ -94,6 +92,8 @@ int core::Engine::InitEngine()
      * Initialises engine systems
     */
    int return_code = 0;
+   LOG_INFO("Initialising Engine")
+   return_code += m_Renderer.Init();
    return_code += m_SysMgrInstance->Init();
 
    return return_code;
@@ -105,14 +105,15 @@ void core::Engine::Tick(float delta)
 }
 void core::Engine::Draw()
 {
-    m_SysMgrInstance->Render(nullptr);
+    m_SysMgrInstance->Render(&m_Renderer);
 }
 void core::Engine::HandleInput()
 {
-
+    glfwPollEvents();
 }
 
 void core::Engine::Exit()
 {
     m_SysMgrInstance->Exit();
+    m_Renderer.Exit();
 }

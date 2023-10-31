@@ -2,6 +2,20 @@ cmake_minimum_required(VERSION 3.7)
 include(GenerateExportHeader)
 
 add_library(engine SHARED "")
+target_link_libraries(engine glfw)
+
+find_package(Vulkan)
+
+if (NOT ${Vulkan_INCLUDE_DIRS} STREQUAL "")
+		set(VULKAN_PATH ${Vulkan_INCLUDE_DIRS})
+		STRING(REGEX REPLACE "/Include" "" VULKAN_PATH ${VULKAN_PATH})
+endif()
+
+target_link_directories(engine PUBLIC ${VULKAN_PATH}/Bin ${VULKAN_PATH}/Lib)
+
+set(VULKAN_LIB_LIST "vulkan-1")
+target_link_libraries(engine ${VULKAN_LIB_LIST})
+
 generate_export_header(engine EXPORT_MACRO_NAME ENGINE_API)
 
 target_sources(engine
@@ -11,8 +25,16 @@ target_sources(engine
         gametimer.cpp
         manager.cpp
         scenemanager.cpp
+        renderer.cpp
+        ecs.cpp
+        gpu.cpp
+        convar.cpp
 )
 
 set_target_properties(engine PROPERTIES VERSION ${PROJECT_VERSION})
 add_compile_definitions(MAKEDLL)
 target_compile_features(engine PUBLIC cxx_std_17)
+
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)

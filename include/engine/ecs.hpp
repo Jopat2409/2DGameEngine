@@ -5,16 +5,20 @@
 
 namespace ent
 {
+
+    class Entity;
+
     class ECS : public core::System
     {
+    friend class Entity;
     public:
         int Init() override;
         void Exit() override;
         void Tick() override;
 
         ENGINE_API void* CreateComponent(int componentType);
-    private:
 
+        void* GetComponent(Entity* ent, int component);
     };
 }
 

@@ -3,6 +3,7 @@
 
 #include "EngineExport.hpp"
 #include "gametimer.hpp"
+#include "console.hpp"
 
 #include <memory>
 #include <unordered_map>
@@ -41,6 +42,8 @@ namespace core
 
     };
 }
+
+#define GET_SYSTEM(sys, tp) ((tp*)core::SystemManager::GetManager()->GetSystem(sys))
 
 
 #endif

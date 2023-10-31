@@ -24,8 +24,11 @@ namespace debug
 #ifdef _DEBUG
     #define LOG_INFO(x) std::cout << "[INFO] : " << x << "\n";
     #define LOG_WARN(x) std::cout << "[WARN] : " << x << "\n";
+    #define ASSERT(x, msg) if(!x) throw std::runtime_error(msg);
 #else
+    #define LOG_INFO(x) std::cout << "[INFO] : " << x << "\n";
     #define LOG_WARN(x) std::cout << "[WARN] : " << x;
+    #define ASSERT(x, msg) if(!x) throw std::runtime_error(msg);
 #endif
 
 

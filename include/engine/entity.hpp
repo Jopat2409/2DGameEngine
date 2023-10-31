@@ -8,13 +8,10 @@ namespace ent
     class Entity
     {
     public:
-        template<typename T, typename... Args>
-        inline Entity(T t, Args... args)
-        {
-
-        }
+        Entity(int compFlags = 0);
         ~Entity();
 
+        void AddComponent(int compFlags);
     };
 }
 

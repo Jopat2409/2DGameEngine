@@ -12,7 +12,7 @@ namespace ent
     {
         float x{0}, y{0};
         float scale_x{0}, scale_y{0};
-        float rot_x{0}, rot_x{0};
+        float rot_x{0}, rot_y{0};
     };
     struct c_render
     {
@@ -25,7 +25,7 @@ namespace ent
     struct c_light
     {
         float intensity{0.5};
-        char* hex{"FFFFFF"};
+        const char* hex{"FFFFFF"};
     };
 }
 

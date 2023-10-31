@@ -7,15 +7,19 @@
 #include "logger.hpp"
 #include "scenemanager.hpp"
 #include "gametimer.hpp"
-
 #include "scene.hpp"
+
 #include "manager.hpp"
+#include "renderer.hpp"
+
+
+#include <GLFW/glfw3.h>
 
 namespace core{
 
     struct ENGINE_API engine_settings_t{
         float tickrate{60.0};
-        char* name{"Application"};
+        const char* name{"Application"};
     };
 
     class ENGINE_API Engine{
@@ -46,6 +50,7 @@ namespace core{
 
         // Systems
         SystemManager* m_SysMgrInstance;
+        gfx::Renderer m_Renderer;
 
         bool m_IsRunning{false};
 

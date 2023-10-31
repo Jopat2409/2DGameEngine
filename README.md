@@ -54,13 +54,13 @@ In order to see all the relevant systems, their types, locations and usage, read
 ### Usage - Console Variables
 In order to keep track of variables that may be changed during runtime by the user, or for variables that must be used over mutliple files / systems, console variables can be used, and they are initialised as such
 ```
-core::CVar("m_testCVar", "0.1");
-core::CVar("m_boundedCVar", "0.1", true, 0, true, 10); // bounded between 0 and 10
+core::ConVar("m_testCVar", "0.1");
+core::ConVar("m_boundedCVar", "0.1", true, 0, true, 10); // bounded between 0 and 10
 ```
 
 You can then access the console variable by aquiring the console system and calling FindCvar()
 ```
-core::CVar* test = GET_SYSTEM(SYS_CONSOLE, core::Console)->FindCvar("m_testCVar");
+core::ConVar* test = GET_SYSTEM(SYS_CONSOLE, core::Console)->FindConvar("m_testCVar");
 test->GetFloat(); // -> 0.1
 test->GetString(); // -> "0.1"
 test->GetInt(); // undefined :0

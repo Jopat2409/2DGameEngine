@@ -12,7 +12,17 @@ void ent::ECS::Tick()
 {
 
 }
-void* ent::ECS::CreateComponent(int componentType)
+int ent::ECS::CreateEntity(int compFlags)
 {
-    return nullptr;
+    int ent_id = GetNextEntity();
+    GET_COMPONENT(ent_id, c_info).flags = compFlags;
+}
+int ent::ECS::GetNextEntity()
+{
+    m_entityPtr++;
+    return m_entityPtr - 1;
+}
+int ent::ECS::GetMaxEntityIndex()
+{
+    return m_entityPtr;
 }

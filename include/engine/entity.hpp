@@ -13,6 +13,23 @@ namespace ent
 
         void AddComponent(int compFlags);
     };
+
+    /***
+     * A base entiy that contains a transform, sprite 
+    */
+    class Sprite2D : public Entity
+    {
+    public:
+        Sprite2D(float x, float y, const char* texture, int flags=0);
+        ~Sprite2D();
+    };
+
+    class DynamicSprite2D : public Entity
+    {
+    public:
+        DynamicSprite2D(float x, float y, const char** texture, int flags=0);
+        ~DynamicSprite2D();
+    };
 }
 
 #endif
